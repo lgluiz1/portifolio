@@ -132,3 +132,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Diz ao Django para confiar no header X-Forwarded-Proto vindo do NGINX
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Cookies de sessão e CSRF apenas via HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Redireciona todo HTTP para HTTPS (mesmo dentro do Django)
+SECURE_SSL_REDIRECT = True
