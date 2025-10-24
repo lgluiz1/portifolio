@@ -1,0 +1,416 @@
+/* =======================
+   Variáveis (Tema Escuro "Harpia" como padrão)
+   ======================== */
+:root, [data-theme="dark"] {
+    --bg-color: #111111;              /* Preto quase puro */
+    --text-color: #f0f0f0;          /* Branco suave */
+    --text-secondary: #999999;      /* Cinza para subtítulos */
+    --primary-color: #ffffff;         /* Branco para botões primários */
+    --primary-text: #111111;        /* Texto do botão primário (preto) */
+    --border-color: #222222;        /* Borda sutil */
+    --grid-color: rgba(255, 255, 255, 0.07); /* Cor da grade */
+}
+
+/* =======================
+   Tema Claro (Opcional)
+   ======================== */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --text-secondary: #555555;
+    --primary-color: #111111;
+    --primary-text: #ffffff;
+    --border-color: #eaeaea;
+    --grid-color: rgba(0, 0, 0, 0.07);
+}
+
+/* =======================
+   Reset e Fundo com Grade (Grid)
+   ======================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* Previne scroll horizontal */
+}
+
+/* O "Truque" da Grade (Grid) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    
+    /* Linhas Horizontais */
+    background-image: linear-gradient(
+        var(--grid-color) 1px, 
+        transparent 1px
+    ),
+    /* Linhas Verticais */
+    linear-gradient(
+        90deg, 
+        var(--grid-color) 1px, 
+        transparent 1px
+    );
+    background-size: 50px 50px; /* Tamanho da grade */
+    opacity: 0.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =======================
+   Navbar (Layout da Imagem)
+   ======================== */
+.navbar {
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    /* Fundo sutil para se destacar da grade */
+    background-color: rgba(17, 17, 17, 0.5); 
+    backdrop-filter: blur(5px);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.navbar .logo-icon { /* Apenas um placeholder */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 18px;
+}
+
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    color: var(--text-color);
+}
+
+.navbar .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .cta-button-nav {
+    color: var(--text-color);
+    background-color: var(--border-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .cta-button-nav:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+}
+.navbar .cta-button-nav span {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+.navbar .cta-button-nav:hover span {
+    transform: translateX(3px);
+}
+
+/* Controles de Tema/Idioma (Estilo sutil) */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+#theme-toggle:hover {
+    color: var(--text-color);
+}
+#lang-select {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    padding: 2px;
+    font-size: 0.8rem;
+}
+
+/* =======================
+   Hero (Layout da Imagem)
+   ======================== */
+#hero {
+    min-height: calc(90vh - 80px); /* 90% da altura da tela menos a navbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espaço entre os elementos */
+}
+
+.status-tag {
+    display: inline-flex; /* Para alinhar o ponto e o texto */
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+    background-color: rgba(34, 34, 34, 0.5);
+}
+
+.status-tag.available .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #3cff3c; /* Verde */
+    box-shadow: 0 0 8px #3cff3c;
+}
+
+.status-tag.rebranding {
+    color: var(--text-secondary);
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 800px;
+    margin-top: 10px;
+    color: var(--text-color);
+}
+
+#hero p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.cta-button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.cta-button span {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+.cta-button:hover span {
+    transform: translateX(4px);
+}
+
+.cta-button.primary {
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+}
+.cta-button.primary:hover {
+    opacity: 0.85;
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+.cta-button.secondary:hover {
+    background-color: var(--border-color);
+}
+
+/* =======================
+   Client Bar (Logos)
+   ======================== */
+.client-bar {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 80px;
+}
+
+.client-bar p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+}
+
+.client-logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Para telas menores */
+}
+
+.client-logos img {
+    max-height: 25px; /* Altura dos logos */
+    filter: grayscale(1) opacity(0.6); /* Efeito da imagem */
+    transition: filter 0.3s ease;
+}
+
+.client-logos img:hover {
+    filter: grayscale(0) opacity(1);
+}
+
+/* =======================
+   Animações de Fade-in
+   ======================== */
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================
+   RESPONSIVIDADE (Mobile)
+   Telas menores que 768px
+   ======================== */
+@media (max-width: 768px) {
+
+    body::before {
+        /* Opcional: diminui a grade no mobile */
+        background-size: 30px 30px; 
+    }
+
+    .container {
+        padding: 0 15px; /* Menor padding lateral */
+    }
+
+    /* --- Navbar Responsiva --- */
+    .navbar .container {
+        flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+        justify-content: space-between;
+    }
+
+    .navbar .logo {
+        /* O logo toma a linha toda de cima,
+           ou divide com os controles */
+        font-size: 0.9rem;
+    }
+
+    .navbar .nav-links {
+        /* Esconde os links do meio no mobile */
+        display: none; 
+        /* Para um menu hamburguer, precisaríamos de JS.
+           Por enquanto, a forma mais limpa é esconder. */
+    }
+
+    .navbar .nav-controls {
+        gap: 10px; /* Diminui o espaço entre os botões */
+    }
+    .navbar .cta-button-nav {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* --- Hero Responsivo --- */
+    #hero {
+        min-height: calc(100vh - 70px); /* Ocupa a tela toda */
+        padding: 40px 0;
+        justify-content: center;
+    }
+
+    .status-tag {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+        /* Centraliza se quebrar a linha */
+        text-align: center;
+    }
+
+    #hero h1 {
+        font-size: 2.2rem; /* Fonte do título bem menor */
+        line-height: 1.3;
+    }
+
+    #hero p {
+        font-size: 1rem; /* Fonte do parágrafo menor */
+        max-width: 90%;
+    }
+
+    .hero-buttons {
+        flex-direction: column; /* Empilha os botões */
+        width: 90%; /* Ocupa 90% da largura */
+        gap: 10px;
+    }
+
+    .cta-button {
+        width: 100%; /* Botões ocupam largura total */
+        text-align: center;
+        padding: 14px;
+    }
+
+    /* --- Client Bar Responsiva --- */
+    .client-bar {
+        margin-top: 40px;
+        padding: 30px 0;
+    }
+
+    .client-logos {
+        gap: 40px; /* Mais espaço vertical entre logos */
+        justify-content: center; /* Centraliza os logos */
+    }
+
+    .client-logos img {
+        max-height: 20px; /* Logos um pouco menores */
+        /* Ajusta para caber 2 ou 3 por linha */
+        flex-basis: 30%; 
+    }
+}

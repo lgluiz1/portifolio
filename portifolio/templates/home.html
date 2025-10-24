@@ -1,1 +1,51 @@
-<h1>Olá Mundo</h1>
+
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+        <div class="hero-content fade-in">
+            <div class="status-tag available">
+                <span class="dot"></span>
+                <span data-lang-pt="Agenda disponível para novos projetos" data-lang-en="Available for new projects">
+                    Agenda disponível para novos projetos
+                </span>
+            </div>
+            
+            <div class="status-tag rebranding">
+                <span data-lang-pt="🚀 Lançando meu novo portfólio!" data-lang-en="🚀 Launching my new portfolio!">
+                    🚀 Lançando meu novo portfólio!
+                </span>
+            </div>
+
+            <h1 data-lang-pt="Um estúdio de design e tecnologia focado em Django, UX e SaaS." data-lang-en="A design and technology studio focused on Django, UX, and SaaS.">
+                Um estúdio de design e tecnologia focado em Django, UX e SaaS.
+            </h1>
+            
+            <p data-lang-pt="Criamos soluções integradas utilizando código limpo e ferramentas ágeis. Desenvolvemos sistemas internos, aplicativos e produtos digitais." data-lang-en="We build integrated solutions using clean code and agile tools. We develop internal systems, applications, and digital products.">
+                Criamos soluções integradas utilizando código limpo e ferramentas ágeis. Desenvolvemos sistemas internos, aplicativos e produtos digitais.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#contato" class="cta-button primary" data-lang-pt="Realizar aplicação" data-lang-en="Apply now">
+                    Realizar aplicação <span>→</span>
+                </a>
+                <a href="#contato" class="cta-button secondary" data-lang-pt="Falar com especialista" data-lang-en="Talk to an expert">
+                    Falar com especialista <span>→</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="client-bar">
+            <p data-lang-pt="Usado por empresas como:" data-lang-en="Trusted by companies like:">Usado por empresas como:</p>
+            <div class="client-logos">
+                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 1">
+                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 2">
+                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 3">
+                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 4">
+                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 5">
+            </div>
+        </div>
+{% endblock content %}
+    
+   
