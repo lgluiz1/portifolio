@@ -1,42 +1,44 @@
 from django.db import models
 
 class FrasesInicio(models.Model):
-    icon = models.CharField(max_length=255)
-    frase_pt = models.CharField(max_length=255)
-    frase_en = models.CharField(max_length=255)
-    frase_es = models.CharField(max_length=255)    
+    icon = models.CharField(max_length=255, blank=True, null=True)
+    frase_principal_pt = models.CharField(max_length=255, blank=True, null=True)
+    frase_frase_principal_en = models.CharField(max_length=255, blank=True, null=True)
+    subfrase_principal_pt = models.CharField(max_length=255, blank=True, null=True)
+    subfrase_principal_en = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.icon , self.frase_pt
+        return f"{self.icon} - {self.frase_principal_pt}"
     
     class Meta:
         verbose_name = 'Frase de inicio'
         verbose_name_plural = 'Frases de inicio'
-    
-class SubFrasesInicio(models.Model):
-    frase_pt = models.CharField(max_length=255)
-    frase_en = models.CharField(max_length=255)
-    frase_es = models.CharField(max_length=255)    
-
-    def __str__(self):
-        return self.frase_pt
-    
-    class Meta:
-        verbose_name = 'Subfrase de inicio'
-        verbose_name_plural = 'Subfrases de inicio'
 
 class FrasesCima(models.Model):
-    icon = models.CharField(max_length=255)
-    frase_pt = models.CharField(max_length=255)
-    frase_en = models.CharField(max_length=255)
-    frase_es = models.CharField(max_length=255)   
+    icon = models.CharField(max_length=255, blank=True, null=True)
+    frase_pt = models.CharField(max_length=255, blank=True, null=True)
+    frase_en = models.CharField(max_length=255, blank=True, null=True)
+    frase_es = models.CharField(max_length=255, blank=True, null=True)   
 
     def __str__(self):
-        return self.icon , self.frase_pt
+        return f"{self.icon} , {self.frase_pt}"
     
     class Meta:
         verbose_name = 'Frase cima'
         verbose_name_plural = 'Frases cima'
+
+class ContatoTerminal(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(max_length=255)
+    mensagem = models.TextField()
+    data_envio = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Contato de {self.nome} ({self.email})"
+
+    class Meta:
+        verbose_name = "Contato do Terminal"
+        verbose_name_plural = "Contatos do Terminal"
 
 class Configuracoe(models.Model):
     logo = models.ImageField(upload_to='logo', blank=True, null=True)

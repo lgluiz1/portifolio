@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block styles %} {% endblock %}
 
@@ -48,7 +50,27 @@
     <main id="hero" class="container">
         {% block content %} {% endblock %}
     </main>
-    <script src="{% static 'js/script.js' %}"></script>
+    
+    <div id="terminal-modal" class="terminal-overlay hidden">
+    <div class="terminal-window">
+        
+        <div class="terminal-header">
+            <span>luizgustavo:/contato</span>
+            <button id="close-terminal" class="terminal-close">&times;</button>
+        </div>
+        
+        <div id="terminal-body" class="terminal-body">
+            <div id="terminal-output">
+                </div>
+            
+            <div class="terminal-prompt-line">
+                <span class="terminal-prompt">&gt;</span>
+                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" autofocus>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/script.js' %}"></script>
     {% block scripts %} {% endblock %}
 </body>
 

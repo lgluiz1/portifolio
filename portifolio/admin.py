@@ -4,5 +4,4 @@ from .models import *
 # Register your models here.
 admin.site.register(FrasesCima)
 admin.site.register(FrasesInicio)
-admin.site.register(SubFrasesInicio)
 admin.site.register(Configuracoe)

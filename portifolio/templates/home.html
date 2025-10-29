@@ -2,7 +2,10 @@
 
 {% extends 'base/base.html' %}
 {% load static %}
+{% block styles %} 
+    <link rel="stylesheet" href="{% static 'css/carrocel_bibliotecas.css' %}">
 
+{% endblock %}
 {% block content %}
         <div class="hero-content fade-in">
             <div class="status-tag available">
@@ -17,35 +20,60 @@
                     🚀 Lançando meu novo portfólio!
                 </span>
             </div>
-
+            {% if frase %}
             <h1 data-lang-pt="Um estúdio de design e tecnologia focado em Django, UX e SaaS." data-lang-en="A design and technology studio focused on Django, UX, and SaaS.">
-                Um estúdio de design e tecnologia focado em Django, UX e SaaS.
+                {{ frase.frase_principal_pt }}
             </h1>
             
             <p data-lang-pt="Criamos soluções integradas utilizando código limpo e ferramentas ágeis. Desenvolvemos sistemas internos, aplicativos e produtos digitais." data-lang-en="We build integrated solutions using clean code and agile tools. We develop internal systems, applications, and digital products.">
-                Criamos soluções integradas utilizando código limpo e ferramentas ágeis. Desenvolvemos sistemas internos, aplicativos e produtos digitais.
+            {{ frase.subfrase_principal_pt }}   
             </p>
+            {% endif %}
 
             <div class="hero-buttons">
-                <a href="#contato" class="cta-button primary" data-lang-pt="Realizar aplicação" data-lang-en="Apply now">
-                    Realizar aplicação <span>→</span>
+                <a href="#contato" class="cta-button primary open-terminal-btn" data-lang-pt="Realizar aplicação" data-lang-en="Apply now">
+                    Solicitar Contato <span>→</span>
                 </a>
-                <a href="#contato" class="cta-button secondary" data-lang-pt="Falar com especialista" data-lang-en="Talk to an expert">
-                    Falar com especialista <span>→</span>
+                <a href="#contato" class="cta-button secondary " data-lang-pt="Falar com especialista" data-lang-en="Talk to an expert">
+                    Falar Comigo  <span>→</span>
                 </a>
             </div>
         </div>
 
         <div class="client-bar">
-            <p data-lang-pt="Usado por empresas como:" data-lang-en="Trusted by companies like:">Usado por empresas como:</p>
-            <div class="client-logos">
-                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 1">
-                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 2">
-                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 3">
-                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 4">
-                <img src="{% static 'img/logo-placeholder.png' %}" alt="Logo Cliente 5">
-            </div>
+            <p data-lang-pt="Usado por empresas como:" data-lang-en="Trusted by companies like:">Tecnologias utilizadas</p>
+            <div class="tech-carousel">
+<div class="tech-carousel">
+  <div class="carousel-track">
+    <i class="fa-brands fa-html5" title="HTML5"></i>
+    <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+    <i class="fa-brands fa-js" title="JavaScript"></i>
+    <i class="fa-brands fa-python" title="Python"></i>
+    <i class="fa-brands fa-react" title="React"></i>
+    <i class="fa-brands fa-node" title="Node.js"></i>
+    <i class="fa-brands fa-git-alt" title="Git"></i>
+    <i class="fa-brands fa-linux" title="Linux"></i>
+    <i class="fa-brands fa-docker" title="Docker"></i>
+    <i class="fa-brands fa-bootstrap" title="Bootstrap"></i>
+
+    <!-- duplicação para efeito contínuo -->
+    <i class="fa-brands fa-html5"></i>
+    <i class="fa-brands fa-css3-alt"></i>
+    <i class="fa-brands fa-js"></i>
+    <i class="fa-brands fa-python"></i>
+    <i class="fa-brands fa-react"></i>
+    <i class="fa-brands fa-node"></i>
+    <i class="fa-brands fa-git-alt"></i>
+    <i class="fa-brands fa-linux"></i>
+    <i class="fa-brands fa-docker"></i>
+    <i class="fa-brands fa-bootstrap"></i>
+  </div>
+</div>
         </div>
+        {% block scripts %} 
+        <script src="{% static 'js/terminal.js' %}"></script>
+        
+        {% endblock %}
 {% endblock content %}
     
    

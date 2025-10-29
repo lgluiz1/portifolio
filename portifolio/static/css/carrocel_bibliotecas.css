@@ -1,0 +1,42 @@
+.tech-carousel {
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  padding: 25px 0;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  animation: scroll-right 25s linear infinite;
+}
+
+.carousel-track i {
+  flex-shrink: 0;
+  font-size: clamp(30px, 5vw, 60px); /* responsivo: mínimo 30px, máximo 60px */
+  color: var(--text-secondary); /* verde neon */
+  margin: 0 40px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.carousel-track i:hover {
+  color: var(--text-secondary);
+  transform: scale(1.3);
+}
+
+/* Animação contínua */
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Ajustes extras para telas pequenas */
+@media (max-width: 768px) {
+  .carousel-track i {
+    margin: 0 20px;
+  }
+}
