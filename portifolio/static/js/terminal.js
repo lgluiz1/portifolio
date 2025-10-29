@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===========================================
-    // --- TRAVA DE SEGURANÇA ---
-    // Impede que o script seja executado múltiplas vezes
-    // ===========================================
+    // Trava de segurança
     if (window.terminalAppIniciado) {
         return;
     }
@@ -25,12 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = {
         name: '',
         email: '',
+        telefone: '', // <-- MUDANÇA
         message: ''
     };
 
     const conversation = [
         { type: 'prompt', text: '[SYSTEM]: Olá! Para iniciar, qual é o seu nome?' },
         { type: 'prompt', text: '[SYSTEM]: Olá, {name}! Qual é o seu email?' },
+        // <-- MUDANÇA: Nova pergunta adicionada
+        { type: 'prompt', text: '[SYSTEM]: Qual é o seu telefone? (Opcional - pressione Enter para pular)' },
         { type: 'prompt', text: '[SYSTEM]: Entendido. Agora, digite sua mensagem.' }
     ];
 
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. FUNÇÕES PRINCIPAIS DO TERMINAL ---
     // ===========================================
 
-    // ABRE O MODAL E INICIA A CONVERSA
     function openTerminal(e) {
         e.preventDefault(); 
         terminalModal.classList.remove('hidden');
@@ -49,13 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // FECHA O MODAL E CHAMA O RESET
     function closeTerminal() {
         terminalModal.classList.add('hidden');
         resetTerminal(); 
     }
     
-    // LIMPA TUDO PARA A PRÓXIMA VEZ
     function resetTerminal() {
         terminalOutput.innerHTML = ''; 
         terminalInput.value = '';
@@ -63,19 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStep = 0; 
         formData.name = '';
         formData.email = '';
+        formData.telefone = ''; // <-- MUDANÇA
         formData.message = '';
     }
 
-    // ADICIONA UMA LINHA DE TEXTO AO TERMINAL
     function addOutput(text, type) {
         const p = document.createElement('p');
         p.textContent = text;
-        p.className = `text-${type}`; // ex: 'text-system', 'text-user'
+        p.className = `text-${type}`;
         terminalOutput.appendChild(p);
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
 
-    // MENSAGEM INICIAL DE CONEXÃO
     function startConversation() {
         addOutput('[SYSTEM]: Conectando ao servidor de Luiz Gustavo...', 'system');
         setTimeout(() => {
@@ -84,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000); 
     }
 
-    // FAZ A PRÓXIMA PERGUNTA
     function askQuestion() {
         if (currentStep < conversation.length) {
             let questionText = conversation[currentStep].text;
@@ -95,10 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // LIDA COM O "ENTER" DO USUÁRIO
     async function handleInput(e) {
-        if (e.key !== 'Enter' || terminalInput.value.trim() === '') return;
-
+        if (e.key !== 'Enter') return; // <-- MUDANÇA: Só processa no Enter
+        
+        // Pega o input. Se for opcional e vazio, tudo bem.
         const input = terminalInput.value.trim();
-        addOutput(`> ${input}`, 'user'); 
+        
+        // Se a etapa NÃO for opcional (ex: nome) e o input estiver vazio, não faça nada.
+        // O passo 2 (telefone) é o único opcional.
+        if (currentStep !== 2 && input === '') {
+            return;
+        }
+
+        addOutput(`> ${input || '(pulado)'}`, 'user'); // Mostra '(pulado)' se for vazio
         terminalInput.value = ''; 
 
         switch (currentStep) {
@@ -108,18 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
             case 1: // Recebeu o Email
                 formData.email = input;
                 break;
-            case 2: // Recebeu a Mensagem
+            case 2: // <-- MUDANÇA: Recebeu o Telefone
+                formData.telefone = input; // Salva o telefone (ou string vazia)
+                break;
+            case 3: // <-- MUDANÇA: Recebeu a Mensagem
                 formData.message = input;
                 currentStep++; // Avança para o passo final
                 
-                // Trava o input e inicia o envio
                 terminalInput.disabled = true; 
                 addOutput('[SYSTEM]: Mensagem recebida. Enviando para Luiz...', 'success');
-                await submitForm(); // Chama a função de envio
-                return; // Sai da função
+                await submitForm(); 
+                return; 
         }
         
-        currentStep++; // Avança para o próximo passo
+        currentStep++; 
         if (currentStep < conversation.length) {
             askQuestion();
         }
@@ -129,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 4. FUNÇÕES DE SUBMISSÃO (DJANGO) ---
     // ===========================================
 
-    // FUNÇÃO PARA PEGAR O CSRF TOKEN DO DJANGO
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -145,24 +149,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return cookieValue;
     }
 
-    // ENVIA O FORMULÁRIO PARA O BACKEND DJANGO
     async function submitForm() {
         addOutput('[SYSTEM]: Processando sua mensagem...', 'system');
         
         const csrftoken = getCookie('csrftoken');
-        
-        // !!! MUITO IMPORTANTE !!!
-        // Verifique se esta é a URL correta do seu urls.py
-        const urlApi = '/api/receber-contato/'; 
+        const urlApi = '/api/receber-contato/'; // Verifique esta URL
 
         try {
             const response = await fetch(urlApi, {
                 method: 'POST',
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData), // Agora inclui o telefone
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'X-CSRFToken': csrftoken // Token de segurança do Django
+                    'X-CSRFToken': csrftoken
                 }
             });
 
@@ -188,18 +188,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2000);
 
                 setTimeout(() => {
-                    closeTerminal(); // Fecha e reseta
+                    closeTerminal(); 
                 }, 3000);
 
             } else {
-                // Erro vindo do Django (ex: dados inválidos)
                 throw new Error(data.mensagem || 'Falha no envio');
             }
         } catch (error) {
-            // Erro de rede ou falha no fetch
             addOutput(`[ERRO]: ${error.message || 'Não foi possível enviar.'}`, 'system');
             addOutput('[SYSTEM]: Por favor, tente contatá-lo por outro meio.', 'system');
-            // Reabilita o input para o usuário tentar de novo
             terminalInput.disabled = false; 
         }
     }
@@ -207,19 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===========================================
     // --- 5. EVENT LISTENERS ---
     // ===========================================
-
-    // LIGA OS BOTÕES "FALE COMIGO"
     openTerminalBtns.forEach(btn => {
         btn.addEventListener('click', openTerminal);
     });
     
-    // BOTÃO DE FECHAR O MODAL
     closeTerminalBtn.addEventListener('click', closeTerminal);
-    
-    // "ENTER" NO INPUT
     terminalInput.addEventListener('keydown', handleInput);
 
-    // FECHAR AO CLICAR FORA (NO OVERLAY)
     terminalModal.addEventListener('click', (e) => {
         if (e.target === terminalModal) {
             closeTerminal();

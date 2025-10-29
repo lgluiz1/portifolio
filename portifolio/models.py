@@ -30,6 +30,10 @@ class FrasesCima(models.Model):
 class ContatoTerminal(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=255)
+    
+    # --- CAMPO ADICIONADO ---
+    telefone = models.CharField(max_length=20, blank=True, null=True) # Opcional
+    
     mensagem = models.TextField()
     data_envio = models.DateTimeField(auto_now_add=True)
 

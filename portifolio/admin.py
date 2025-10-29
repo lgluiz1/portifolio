@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(FrasesCima)
 admin.site.register(FrasesInicio)
 admin.site.register(Configuracoe)
+admin.site.register(ContatoTerminal)
