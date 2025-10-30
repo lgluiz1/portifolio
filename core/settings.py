@@ -103,6 +103,30 @@ DATABASES = {
     }
 }
 
+MEDIA_URL = 'https://st63136.ispot.cc/uploads/portifolio/'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.sftpstorage.SFTPStorage",
+        "OPTIONS": {
+            'host': 'storage2700.is.cc',
+            'root_path': '/home/st63136/domains/st63136.ispot.cc/public_html/uploads/portifolio',  # ✅ caminho correto
+            'params': {
+                'username': 'st63136',
+                'password': 'xh3!B8Wp',
+                'port': 22,              # ⚠️ sempre 22 para SFTP
+                'timeout': 30,
+                'allow_agent': False,
+                'look_for_keys': False,
+            },
+        },
+    },
+
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -145,7 +169,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 # Caminho para salva os arquivos de imagens
-MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
