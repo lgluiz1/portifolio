@@ -7,16 +7,33 @@
     /* Fundo escuro, combinando com seu site */
     background-color: #000; 
     padding: 80px 20px; /* Espaçamento interno */
+    width: 100%;
     
-    /* Pega o mesmo fundo de grid do seu site (opcional) */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
+    /* --- AQUI ESTÁ A MÁGICA DA FUMAÇA --- */
+    /* Cria um gradiente vertical:
+       - Começa com preto semi-transparente (fumaça) no topo.
+       - Fica totalmente preto no meio da seção (conteúdo opaco).
+       - Termina com preto semi-transparente (fumaça) na parte de baixo.
+    */
+    background: linear-gradient(
+        to bottom, /* Direção do gradiente: de cima para baixo */
+        rgba(0, 0, 0, 0.027) 0%,    /* Começa com 60% de opacidade (fumaça suave) */
+        rgba(0, 0, 0, 1) 15%,     /* Atinge 100% de opacidade (preto sólido) em 15% da altura */
+        rgba(0, 0, 0, 1) 85%,     /* Mantém 100% de opacidade até 85% da altura */
+        rgba(0, 0, 0, 0.055) 100%   /* Volta para 60% de opacidade (fumaça suave) no final */
+    );
+    /* Se você quiser o grid de fundo, pode adicionar uma imagem de fundo junto.
+       Ex: background: linear-gradient(..., ...), url('/caminho/para/seu-grid.png') repeat;
+       Por enquanto, o gradiente de fumaça substitui o gradiente anterior.
+    */
+    
 }
 
 /* Container para centralizar o conteúdo */
-#projetos .container {
-    max-width: 1200px;
+#projetos .container-projetos {
+    max-width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
     margin: 0 auto;
 }
 
@@ -30,14 +47,16 @@
 
 /* A grade que segura os cards */
 .projeto-grid {
+    width: 1200px;
     display: grid;
     /* Cria colunas responsivas:
       - Tenta criar colunas de 350px.
       - Em telas maiores, elas crescem (1fr).
       - Em telas menores, quebram para 1 coluna.
     */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px; /* Espaço entre os cards */
+    margin: 0 auto;
 }
 
 /* O card do projeto:

@@ -20,9 +20,9 @@
 <body>
 
     <nav class="navbar">
-        <div class="container">
+        <div class="container-nav">
             {% if config_global %}
-            <a href="/" class="logo"> <img src="{{ config_global.logo.url }}" alt="" width="200px"></a>
+            <a href="/" class="logo"> <img src="{{ config_global.logo.url }}" alt="" width="100px"></a>
             {% else %}
             <a href="/" class="logo">
                 <span class="logo-icon">?</span> LUIZGUSTAVO.TECH
@@ -47,7 +47,7 @@
             </div>
         </div>
     </nav>
-    <main id="hero" class="container">
+    <main id="hero" class="container-section">
         {% block content %} {% endblock %}
     </main>
     
@@ -70,6 +70,64 @@
         </div>
     </div>
 </div>
+<footer id="footer">
+    <div class="footer-container">
+        
+        <div class="footer-top">
+            
+            <div class="footer-cta">
+                <h2 class="footer-titulo">
+                    Vamos construir o próximo
+                    <br>
+                    futuro digital?
+                </h2>
+                <p class="footer-subtitulo">
+                    Pronto para começar seu projeto? Meu terminal está 
+                    aberto para novas ideias.
+                </p>
+                <a href="#contato" style="background-color: rgba(0, 0, 0, 0.445);" class="cta-button-nav" data-lang-pt="Fale comigo" data-lang-en="Contact me">
+                    Fale comigo <span>→</span>
+                </a>
+            </div>
+            
+            <div class="footer-links-wrapper">
+                
+                <div class="footer-coluna-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#hero">Início</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#servicos">Serviços</a></li> </ul>
+                </div>
+                
+                <div class="footer-coluna-links">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="URL_DO_SEU_GITHUB" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a></li>
+                        <li><a href="URL_DO_SEU_LINKEDIN" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a></li>
+                        <li><a href="mailto:seu@email.com">
+                            <i class="fas fa-envelope"></i> Email
+                        </a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <p>
+                © 2024 Luiz Gustavo. 
+                <span class="highlight">Feito linha por linha de código.</span>
+            </p>
+        </div>
+        
+    </div>
+</footer>
 <script src="{% static 'js/script.js' %}"></script>
     {% block scripts %} {% endblock %}
 </body>

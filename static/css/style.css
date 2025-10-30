@@ -66,8 +66,9 @@ body::before {
     opacity: 0.5;
 }
 
-.container {
-    max-width: 1200px;
+.container-section {
+    max-width: 100%;
+   
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -77,19 +78,27 @@ body::before {
    ======================== */
 .navbar {
     width: 100%;
-    padding: 20px 0;
+    padding: 20px 20px;
     border-bottom: 1px solid var(--border-color);
     /* Fundo sutil para se destacar da grade */
     background-color: rgba(17, 17, 17, 0.5); 
     backdrop-filter: blur(5px);
+    /* display: flex; <-- REMOVA */
+    /* justify-content: space-between; <-- REMOVA */
+    /* align-items: center; <-- REMOVA */
 }
 
-.navbar .container {
+/* 2. Adicione width e margin auto aqui */
+.navbar .container-nav {
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
 
+    /* --- ADICIONE ESTAS DUAS LINHAS --- */
+    width: 100%;      /* Garante que ele ocupe o espaço em telas menores */
+    margin: 0 auto;   /* Centra o container horizontalmente */
+}
 .navbar .logo {
     font-weight: 700;
     font-size: 1rem;
@@ -185,8 +194,8 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 80px 0;
+    text-align: center;
 }
 
 .hero-content {
@@ -543,4 +552,138 @@ body::before {
     
     /* Cor do cursor piscando */
     caret-color: #00ff00;
+}
+
+/* ======================= */
+/* FOOTER          */
+/* ======================= */
+
+#footer {
+    /* Fundo preto e cor de texto principal */
+    background-color: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(20px);
+    color: var(--text-secondary); /* Usa sua cor de texto secundária (#aaa, #ccc) */
+    
+    /* Borda superior para separar do conteúdo */
+    border-top: 1px solid var(--border-color); /* Usa sua cor de borda (#222, #333) */
+    
+    padding: 80px 0 30px 0; /* 80px em cima, 30px embaixo */
+    
+    /* Pega o mesmo fundo de grid do seu site (opcional, se não estiver no body) */
+    /* background-image: var(--grid-background-image); */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* PARTE 1: CTA E LINKS */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Faz quebrar em telas menores */
+    gap: 40px; /* Espaço entre as colunas no mobile */
+}
+
+/* Coluna da Esquerda (CTA) */
+.footer-cta {
+    flex-basis: 50%; /* Ocupa metade do espaço */
+    min-width: 300px; /* Garante que não fique muito espremido */
+}
+
+.footer-titulo {
+    font-size: clamp(1.8rem, 4vw, 2.5rem); /* Título grande e responsivo */
+    color: var(--text-color); /* Branco */
+    margin-bottom: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.footer-subtitulo {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 450px;
+    margin-bottom: 25px;
+}
+
+/* Reutiliza o botão do terminal, mas você pode
+   estilizar o .cta-button-nav se ele for diferente */
+#footer .cta-button-nav {
+    /* O estilo .open-terminal-btn já deve funcionar */
+    font-size: 1rem;
+    padding: 12px 24px;
+}
+
+/* Coluna da Direita (Links) */
+.footer-links-wrapper {
+    display: flex;
+    gap: 60px; /* Espaço entre "Navegação" e "Conecte-se" */
+    flex-wrap: wrap;
+}
+
+.footer-coluna-links h4 {
+    font-size: 1rem;
+    color: var(--text-color); /* Branco */
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer-coluna-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-coluna-links li {
+    margin-bottom: 12px;
+}
+
+.footer-coluna-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    
+    /* Alinha ícone e texto */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-coluna-links a:hover {
+    color: var(--text-color); /* Branco no hover */
+    padding-left: 5px; /* Efeito sutil de "empurrar" */
+}
+
+/* PARTE 2: A ASSINATURA */
+.footer-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 60px 0 25px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888; /* Uma cor ainda mais sutil */
+}
+
+.footer-bottom .highlight {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .footer-cta {
+        /* No mobile, o CTA ocupa 100% da largura */
+        flex-basis: 100%; 
+    }
+    
+    .footer-links-wrapper {
+        gap: 40px;
+    }
 }
