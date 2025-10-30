@@ -1,0 +1,114 @@
+/* ===================
+   ESTILOS DOS PROJETOS
+   =================== */
+
+/* A seção principal de projetos */
+#projetos {
+    /* Fundo escuro, combinando com seu site */
+    background-color: #000; 
+    padding: 80px 20px; /* Espaçamento interno */
+    
+    /* Pega o mesmo fundo de grid do seu site (opcional) */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* Container para centralizar o conteúdo */
+#projetos .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* O título da seção (caso decida usar) */
+#projetos .titulo-secao {
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* A grade que segura os cards */
+.projeto-grid {
+    display: grid;
+    /* Cria colunas responsivas:
+      - Tenta criar colunas de 350px.
+      - Em telas maiores, elas crescem (1fr).
+      - Em telas menores, quebram para 1 coluna.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px; /* Espaço entre os cards */
+}
+
+/* O card do projeto:
+   Aqui está a mágica da "borda sombreada"
+*/
+.projeto-card {
+    background-color: #111; /* Fundo do card, um pouco mais claro que o #000 */
+    border-radius: 12px;
+    overflow: hidden; /* Garante que a imagem não saia das bordas */
+    
+    /* 1. A BORDA SUTIL */
+    border: 1px solid #222; 
+    
+    /* 2. A BORDA SOMBREADA (Sombra) */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    transition: all 0.3s ease;
+}
+
+/* Efeito de hover para o card */
+.projeto-card:hover {
+    transform: translateY(-5px); /* Eleva o card sutilmente */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); /* Sombra mais forte */
+    border-color: #333;
+}
+
+/* Container da imagem */
+.card-imagem {
+    width: 100%;
+    aspect-ratio: 16 / 10; /* Proporção da imagem (ajuste se precisar) */
+    overflow: hidden;
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem cobrir o espaço sem distorcer */
+}
+
+/* Conteúdo de texto abaixo da imagem */
+.card-conteudo {
+    padding: 24px;
+}
+
+/* Cabeçalho (Tecnologias + Ano) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.card-header .tecnologias {
+    font-weight: 500;
+    color: #bbb;
+}
+
+/* Nome do Projeto */
+.projeto-card h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+/* Tipo do Projeto */
+.projeto-card .tipo-projeto {
+    font-size: 1rem;
+    color: #ccc;
+    margin: 0;
+}
