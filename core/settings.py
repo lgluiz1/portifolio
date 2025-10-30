@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # Minhas apps
     "portifolio",
+    "servicos",
 ]
 
 MIDDLEWARE = [

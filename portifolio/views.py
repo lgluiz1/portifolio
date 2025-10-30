@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from servicos.models import *
 import random
 
 def home(request):
@@ -10,12 +11,14 @@ def home(request):
     # Busca todas as frases FrasesInicio no banco e escolhe uma aleatoriamente
     frases= FrasesInicio.objects.all()
     # escolher uma aleatoria 
+    projetos = Projeto.objects.all()
     frase= random.choice(frases)
     context = {
         'frases_cima': frases_cima,
         'frases_inicio': frases_inicio,
         'Config': Config,
-        'frase': frase
+        'frase': frase,
+        'projetos': projetos,
     }
     return render(request, 'home.html', context)
 
@@ -56,3 +59,4 @@ def receber_contato_terminal(request):
         return JsonResponse({'status': 'erro', 'mensagem': 'Formato de JSON inválido'}, status=400)
     except Exception as e:
         return JsonResponse({'status': 'erro', 'mensagem': str(e)}, status=500)
+    

@@ -76,20 +76,29 @@
         <section id="projetos">
     <div class="container-projetos">
         <div class="projeto-grid">
-
+            {% for projeto in projetos %}
             <div class="projeto-card">
                 <div class="card-imagem">
-                    <img src="https://via.placeholder.com/600x400" alt="Preview do Projeto SaleHunt">
+                    <img src="{{ projeto.foto_principal.url }}" alt="Preview do Projeto SaleHunt">
                 </div>
                 <div class="card-conteudo">
                     <div class="card-header">
-                        <span class="tecnologias">Bubble + Supabase</span>
+                        <span class="tecnologias">
+                            {% for bibliotecas in projeto.bibliotecas.all %}
+                                {{ bibliotecas }}
+                            {% endfor %}
+                        </span>
                         <span class="ano">2024</span>
                     </div>
-                    <h3>SaleHunt</h3>
-                    <p class="tipo-projeto">Web Platform</p>
+                    <h3>{{ projeto.nome }}</h3>
+                    <p class="tipo-projeto">
+                        {% for tipos in projeto.tipos.all %}
+                            {{ tipos }}
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
+            {% endfor %}
 
             <div class="projeto-card">
                 <div class="card-imagem">
