@@ -687,3 +687,27 @@ body::before {
         gap: 40px;
     }
 }
+/*
+ * EFEITO REVEAL ON SCROLL
+ */
+
+/* * 1. O estado inicial (escondido)
+ * Por padrão, todo elemento com esta classe começa
+ * invisível e um pouco para baixo.
+*/
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px); /* Começa 30px abaixo */
+    
+    /* A mágica da transição suave */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* * 2. O estado final (visível)
+ * Quando o JS adicionar esta classe, o elemento aparece
+ * suavemente em sua posição original.
+*/
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

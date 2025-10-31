@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="client-bar">
+        <div class="client-bar reveal-on-scroll">
             <p data-lang-pt="Usado por empresas como:" data-lang-en="Trusted by companies like:">Tecnologias utilizadas</p>
             <div class="tech-carousel">
 <div class="tech-carousel">
@@ -70,10 +70,11 @@
 </div>
         </div>
         </div>
-        <h2 data-lang-pt="Um estúdio de design e tecnologia focado em Django, UX e SaaS." data-lang-en="A design and technology studio focused on Django, UX, and SaaS.">
+        <h1 class="reveal-on-scroll" data-lang-pt="Um estúdio de design e tecnologia focado em Django, UX e SaaS." data-lang-en="A design and technology studio focused on Django, UX, and SaaS.">
                💡 Analise você mesmo os projetos 📁
-            </h2>
-        <section id="projetos">
+            </h1>
+            <p class="reveal-on-scroll">São projetos simples como uma unica pagina a projetos com sistemas e banco de dados</p>
+        <section id="projetos" class="reveal-on-scroll">
     <div class="container-projetos">
         <div class="projeto-grid">
             {% for projeto in projetos %}
@@ -88,7 +89,7 @@
                                 {{ bibliotecas }}
                             {% endfor %}
                         </span>
-                        <span class="ano">2024</span>
+                        <span class="ano">{{ projeto.ano }}</span>
                     </div>
                     <h3>{{ projeto.nome }}</h3>
                     <p class="tipo-projeto">
@@ -96,37 +97,12 @@
                             {{ tipos }}
                         {% endfor %}
                     </p>
+                    <a href="{{ projeto.preview_url }}" target="_blank"> Ver Projeto</a>
                 </div>
             </div>
             {% endfor %}
 
-            <div class="projeto-card">
-                <div class="card-imagem">
-                    <img src="https://via.placeholder.com/600x400" alt="Preview do Projeto Namtab">
-                </div>
-                <div class="card-conteudo">
-                    <div class="card-header">
-                        <span class="tecnologias">Figma</span>
-                        <span class="ano">2024</span>
-                    </div>
-                    <h3>Namtab</h3>
-                    <p class="tipo-projeto">Web Design</p>
-                </div>
-            </div>
-
-            <div class="projeto-card">
-                <div class="card-imagem">
-                    <img src="https://via.placeholder.com/600x400" alt="Preview do Projeto SelaCor">
-                </div>
-                <div class="card-conteudo">
-                    <div class="card-header">
-                        <span class="tecnologias">Bubble + Supabase</span>
-                        <span class="ano">2024</span>
-                    </div>
-                    <h3>SelaCor</h3>
-                    <p class="tipo-projeto">Mobile App + Web Platform</p>
-                </div>
-            </div>
+            
 
             </div>
     </div>
