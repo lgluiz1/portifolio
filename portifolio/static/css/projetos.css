@@ -47,15 +47,17 @@
 
 /* A grade que segura os cards */
 .projeto-grid {
-    width: 1200px;
+    /* ERRO: Não use largura fixa */
+    /* width: 1200px; */ 
+
+    /* CORREÇÃO: Use largura MÁXIMA e 100% de largura */
+    max-width: 1200px; /* Será no MÁXIMO 1200px em telas grandes */
+    width: 100%;       /* Vai encolher para 100% em telas menores */
+
+    /* O resto do seu código está PERFEITO */
     display: grid;
-    /* Cria colunas responsivas:
-      - Tenta criar colunas de 350px.
-      - Em telas maiores, elas crescem (1fr).
-      - Em telas menores, quebram para 1 coluna.
-    */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; /* Espaço entre os cards */
+    gap: 30px; 
     margin: 0 auto;
 }
 
