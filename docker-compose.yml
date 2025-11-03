@@ -6,7 +6,7 @@ services:
     container_name: portfolio
     restart: always
     ports:
-      - "8001:8000"  # 8001 na VPS, 8000 no container
+      - "8002:8000"  # 8001 na VPS, 8000 no container
     env_file:
       - .env          # Variáveis de ambiente com DB
     volumes:
